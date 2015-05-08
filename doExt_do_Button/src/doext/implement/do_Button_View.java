@@ -1,6 +1,7 @@
 package doext.implement;
 
 import java.util.Map;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -38,7 +39,7 @@ import doext.define.do_Button_MAbstract;
  * DoInvokeResult(this.model.getUniqueKey());
  */
 @SuppressLint("ClickableViewAccessibility")
-public class do_Button_View extends Button implements DoIUIModuleView, do_Button_IMethod, OnTouchListener,OnClickListener {
+public class do_Button_View extends Button implements DoIUIModuleView, do_Button_IMethod, OnTouchListener, OnClickListener {
 
 	/**
 	 * 每个UIview都会引用一个具体的model实例；
@@ -112,6 +113,9 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 	public void onPropertiesChanged(Map<String, String> _changedValues) {
 		DoUIModuleHelper.handleBasicViewProperChanged(this.model, _changedValues);
 		DoUIModuleHelper.setFontProperty(this.model, _changedValues);
+		if (_changedValues.containsKey("enabled")) {
+			this.setEnabled(Boolean.parseBoolean(_changedValues.get("enabled")));
+		}
 		if (_changedValues.containsKey("bgImage")) {
 			try {
 				setBackgroundDrawable(_changedValues);
@@ -128,7 +132,7 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		String _bgImage = _changedValues.get("bgImage");
 		if (_bgImage != null) {
 			String _bgImageFillPath = DoIOHelper.getLocalFileFullPath(this.model.getCurrentPage().getCurrentApp(), _bgImage);
-			Bitmap _bitmap = DoImageLoadHelper.getInstance().loadLocal(_bgImageFillPath,(int)this.model.getRealWidth(), (int)this.model.getRealHeight());
+			Bitmap _bitmap = DoImageLoadHelper.getInstance().loadLocal(_bgImageFillPath, (int) this.model.getRealWidth(), (int) this.model.getRealHeight());
 			BitmapDrawable _bitmapDrawable = null;
 			if (_bitmap != null) {
 				_bitmapDrawable = new BitmapDrawable(DoResourcesHelper.getResources(), _bitmap);
@@ -179,17 +183,17 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 	public void onDispose() {
 		// ...do something
 	}
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(!this.model.getEventCenter().containsEvent("touch")){
+		if (!this.model.getEventCenter().containsEvent("touch")) {
 			return false;
 		}
 		return super.onTouchEvent(event);
 	}
-	
+
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {	
+	public boolean onTouch(View v, MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			doButtonView_TouchDown();
