@@ -23,7 +23,7 @@ import core.helper.DoImageLoadHelper;
 import core.helper.DoResourcesHelper;
 import core.helper.DoTextHelper;
 import core.helper.DoUIModuleHelper;
-import core.helper.jsonparse.DoJsonNode;
+import org.json.JSONObject;
 import core.interfaces.DoIScriptEngine;
 import core.interfaces.DoIUIModuleView;
 import core.object.DoInvokeResult;
@@ -152,7 +152,7 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 	 * @_invokeResult 用于返回方法结果对象
 	 */
 	@Override
-	public boolean invokeSyncMethod(String _methodName, DoJsonNode _dictParas, DoIScriptEngine _scriptEngine, DoInvokeResult _invokeResult) throws Exception {
+	public boolean invokeSyncMethod(String _methodName, JSONObject _dictParas, DoIScriptEngine _scriptEngine, DoInvokeResult _invokeResult) throws Exception {
 		// ...do something
 		return false;
 	}
@@ -171,7 +171,7 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 	 *                    DoInvokeResult(this.model.getUniqueKey());
 	 */
 	@Override
-	public boolean invokeAsyncMethod(String _methodName, DoJsonNode _dictParas, DoIScriptEngine _scriptEngine, String _callbackFuncName) {
+	public boolean invokeAsyncMethod(String _methodName, JSONObject _dictParas, DoIScriptEngine _scriptEngine, String _callbackFuncName) {
 		// ...do something
 		return false;
 	}
