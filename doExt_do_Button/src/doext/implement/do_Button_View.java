@@ -1,7 +1,6 @@
 package doext.implement;
 
 import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
