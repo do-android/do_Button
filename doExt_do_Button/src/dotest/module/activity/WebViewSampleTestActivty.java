@@ -57,7 +57,7 @@ public class WebViewSampleTestActivty extends DoTestActivity{
 	protected void doTestAsyncMethod() {
 		Map<String, String>  _paras_loadString = new HashMap<String, String>();
         _paras_loadString.put("text", "<b>百度</b>");
-        DoService.ansyncMethod(this.model, "loadString", _paras_loadString, new DoService.EventCallBack() {
+        DoService.asyncMethod(this.model, "loadString", _paras_loadString, new DoService.EventCallBack() {
 			@Override
 			public void eventCallBack(String _data) {//回调函数
 				DoServiceContainer.getLogEngine().writeDebug("异步方法回调：" + _data);
