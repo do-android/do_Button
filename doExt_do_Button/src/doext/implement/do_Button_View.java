@@ -1,6 +1,9 @@
 package doext.implement;
 
 import java.util.Map;
+
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,7 +25,6 @@ import core.helper.DoImageLoadHelper;
 import core.helper.DoResourcesHelper;
 import core.helper.DoTextHelper;
 import core.helper.DoUIModuleHelper;
-import org.json.JSONObject;
 import core.interfaces.DoIScriptEngine;
 import core.interfaces.DoIUIModuleView;
 import core.object.DoInvokeResult;
@@ -197,6 +199,7 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		case MotionEvent.ACTION_DOWN:
 			doButtonView_TouchDown();
 			break;
+		case MotionEvent.ACTION_CANCEL:
 		case MotionEvent.ACTION_UP:
 			doButtonView_TouchUp();
 			break;
