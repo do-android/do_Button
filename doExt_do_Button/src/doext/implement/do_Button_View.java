@@ -16,7 +16,6 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import core.DoServiceContainer;
 import core.helper.DoIOHelper;
@@ -40,7 +39,7 @@ import doext.define.do_Button_MAbstract;
  * DoInvokeResult(this.model.getUniqueKey());
  */
 @SuppressLint("ClickableViewAccessibility")
-public class do_Button_View extends Button implements DoIUIModuleView, do_Button_IMethod, OnTouchListener, OnClickListener {
+public class do_Button_View extends Button implements DoIUIModuleView, do_Button_IMethod,OnClickListener {
 
 	/**
 	 * 每个UIview都会引用一个具体的model实例；
@@ -92,7 +91,6 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		this.setTextSize(TypedValue.COMPLEX_UNIT_PX, DoUIModuleHelper.getDeviceFontSize(_doUIModule, "17"));
 		this.setFocusable(false);
 		this.setOnClickListener(this);
-		this.setOnTouchListener(this);
 	}
 
 	/**
@@ -190,11 +188,6 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		if (!this.model.getEventCenter().containsEvent("touch")) {
 			return false;
 		}
-		return super.onTouchEvent(event);
-	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			doButtonView_TouchDown();
@@ -204,9 +197,9 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 			doButtonView_TouchUp();
 			break;
 		}
-		return false;
+		return super.onTouchEvent(event);
 	}
-
+	
 	@Override
 	public void onClick(View v) {
 		doButtonView_Touch();
