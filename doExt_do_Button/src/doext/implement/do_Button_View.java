@@ -11,7 +11,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -19,8 +18,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.FrameLayout.LayoutParams;
-import android.widget.ImageView.ScaleType;
 import core.DoServiceContainer;
 import core.helper.DoIOHelper;
 import core.helper.DoImageHandleHelper;
@@ -51,8 +48,9 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 	private do_Button_MAbstract model;
 	private float radius;
 
-	public float getRadius() {
-		return radius;
+	private float getRadius() {
+		double zoom = (this.getModel().getXZoom() + this.getModel().getYZoom()) / 2;
+		return (float) (this.radius * zoom);
 	}
 
 	public void setRadius(float radius) {
