@@ -11,12 +11,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageView.ScaleType;
 import core.DoServiceContainer;
 import core.helper.DoIOHelper;
 import core.helper.DoImageHandleHelper;
@@ -61,14 +65,23 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		this.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER);
 		this.setPadding(1, 0, 1, 0);
 	}
+	
+	@Override
+	public void setBackgroundColor(int color) {
+		super.setBackgroundColor(color);
+		onDrawBackgroundDrawable();
+	}
 
 	private void onDrawBackgroundDrawable() {
-		Bitmap bgBitmap = DoImageHandleHelper.drawableToBitmap(getBackground(), (int) this.model.getRealWidth(), (int) this.model.getRealHeight());
-		Bitmap newBitmap = Bitmap.createBitmap(bgBitmap.getWidth(), bgBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-		Canvas newCanvas = new Canvas(newBitmap);
-		newCanvas.drawBitmap(bgBitmap, 0, 0, new Paint());
-		BitmapDrawable bd = new BitmapDrawable(DoResourcesHelper.getResources(), createRadiusBitmap(newBitmap));
-		setBackgroundDrawable(bd);
+		Drawable bg = getBackground();
+		if(bg != null && model != null){
+			Bitmap bgBitmap = DoImageHandleHelper.drawableToBitmap(getBackground(), (int) this.model.getRealWidth(), (int) this.model.getRealHeight());
+			Bitmap newBitmap = Bitmap.createBitmap(bgBitmap.getWidth(), bgBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas newCanvas = new Canvas(newBitmap);
+			newCanvas.drawBitmap(bgBitmap, 0, 0, new Paint());
+			BitmapDrawable bd = new BitmapDrawable(DoResourcesHelper.getResources(), createRadiusBitmap(newBitmap));
+			setBackgroundDrawable(bd);
+		}
 	}
 
 	private Bitmap createRadiusBitmap(Bitmap bitmap) {
