@@ -40,7 +40,7 @@ import doext.define.do_Button_MAbstract;
  * DoInvokeResult(this.model.getUniqueKey());
  */
 @SuppressLint("ClickableViewAccessibility")
-public class do_Button_View extends Button implements DoIUIModuleView, do_Button_IMethod,OnClickListener {
+public class do_Button_View extends Button implements DoIUIModuleView, do_Button_IMethod, OnClickListener {
 
 	/**
 	 * 每个UIview都会引用一个具体的model实例；
@@ -63,7 +63,7 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		this.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER);
 		this.setPadding(1, 0, 1, 0);
 	}
-	
+
 	@Override
 	public void setBackgroundColor(int color) {
 		super.setBackgroundColor(color);
@@ -72,7 +72,7 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 
 	private void onDrawBackgroundDrawable() {
 		Drawable bg = getBackground();
-		if(bg != null && model != null){
+		if (bg != null && model != null) {
 			Bitmap bgBitmap = DoImageHandleHelper.drawableToBitmap(getBackground(), (int) this.model.getRealWidth(), (int) this.model.getRealHeight());
 			Bitmap newBitmap = Bitmap.createBitmap(bgBitmap.getWidth(), bgBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 			Canvas newCanvas = new Canvas(newBitmap);
@@ -199,6 +199,9 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		if (!this.model.getEventCenter().containsEvent("touch")) {
 			return false;
 		}
+		if (!isEnabled()) {
+			return false;
+		}
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			doButtonView_TouchDown();
@@ -210,7 +213,7 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		}
 		return super.onTouchEvent(event);
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		doButtonView_Touch();
