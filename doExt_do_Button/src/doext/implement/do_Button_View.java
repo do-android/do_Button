@@ -199,9 +199,11 @@ public class do_Button_View extends Button implements DoIUIModuleView, do_Button
 		if (!this.model.getEventCenter().containsEvent("touch")) {
 			return false;
 		}
+
 		if (!isEnabled()) {
 			return false;
 		}
+
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			doButtonView_TouchDown();
